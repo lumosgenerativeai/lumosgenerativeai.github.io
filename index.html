@@ -1004,6 +1004,26 @@
       setLanguage(savedLang);
     }
 
+    // Calculate and set image panel width
+    function updateImagePanelWidth() {
+      const viewportHeight = window.innerHeight - 64; // minus navbar
+      const imageWidth = viewportHeight * (9 / 16);
+      const imagePanel = document.getElementById('imagePanel');
+      const contentPanel = document.querySelector('.content-panel');
+
+      if (imagePanel) {
+        imagePanel.style.width = imageWidth + 'px';
+      }
+
+      if (contentPanel) {
+        contentPanel.style.marginRight = imageWidth + 'px';
+      }
+    }
+
+    // Update on load and resize
+    updateImagePanelWidth();
+    window.addEventListener('resize', updateImagePanelWidth);
+
     // Scroll animations
     const observerOptions = {
       threshold: 0.1,
@@ -1189,7 +1209,7 @@
       }
 
       function addCollabMessage(role, text) {
-        const MAX_MESSAGES = 4;
+        const MAX_MESSAGES = 6;
 
         // Check if we already have max messages
         const currentMessages = collabChatStream.querySelectorAll('.collab-msg');

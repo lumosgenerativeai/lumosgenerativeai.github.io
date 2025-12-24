@@ -159,7 +159,6 @@
     /* Left Content Panel */
     .content-panel {
       flex: 1;
-      max-width: 50%;
       overflow-y: auto;
       padding: 60px 80px 120px;
       background: #ffffff;
@@ -167,18 +166,21 @@
 
     /* Right Fixed Image */
     .image-panel {
-      flex: 1;
       position: fixed;
       right: 0;
       top: 64px;
       bottom: 0;
-      width: 50%;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      background: #000;
     }
 
     .image-panel img {
-      width: 100%;
+      width: auto;
       height: 100%;
+      aspect-ratio: 9/16;
       object-fit: cover;
       transition: transform 0.6s ease-out;
     }
@@ -1281,9 +1283,9 @@
     }
 
     .collab-text {
-      line-height: 1.5;
+      line-height: 1.6;
       color: #666;
-      font-size: 12px;
+      font-size: 14px;
     }
 
     .collab-text strong {
@@ -1577,4 +1579,341 @@
       .fidelity-style-grid {
         grid-template-columns: 1fr;
       }
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background: #0a0a0a;
+      color: #e5e5e5;
+    }
+
+    body.dark-mode .navbar {
+      background: rgba(10, 10, 10, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    body.dark-mode .navbar-brand,
+    body.dark-mode .hero-title,
+    body.dark-mode .section-title,
+    body.dark-mode .what-title,
+    body.dark-mode .cta-title,
+    body.dark-mode .agent-title,
+    body.dark-mode .capability-title,
+    body.dark-mode .what-item-title,
+    body.dark-mode .agent-highlight,
+    body.dark-mode .keyword-reveal-title,
+    body.dark-mode .limitation-card-title,
+    body.dark-mode .production-card-title,
+    body.dark-mode .collab-topic-display,
+    body.dark-mode .fidelity-style-info h4 {
+      color: #e5e5e5;
+    }
+
+    body.dark-mode .content-panel {
+      background: #0a0a0a;
+    }
+
+    body.dark-mode .navbar-cta {
+      background: #e5e5e5;
+      color: #0a0a0a;
+    }
+
+    body.dark-mode .navbar-cta:hover {
+      background: #fff;
+    }
+
+    body.dark-mode .hero-cta {
+      background: #e5e5e5;
+      color: #0a0a0a;
+    }
+
+    body.dark-mode .hero-cta:hover {
+      background: #fff;
+    }
+
+    body.dark-mode .production-card,
+    body.dark-mode .agent-content,
+    body.dark-mode .capability-card,
+    body.dark-mode .limitation-card,
+    body.dark-mode .cta-section,
+    body.dark-mode .prompt-demo-box,
+    body.dark-mode .keyword-reveal-container,
+    body.dark-mode .style-reference-table,
+    body.dark-mode .motion-syntax-box,
+    body.dark-mode .formula-example,
+    body.dark-mode .collab-context-card,
+    body.dark-mode .fidelity-original-showcase,
+    body.dark-mode .fidelity-style-card {
+      background: #1a1a1a;
+      border-color: #333;
+    }
+
+    body.dark-mode .production-card:hover,
+    body.dark-mode .agent-content:hover,
+    body.dark-mode .capability-card:hover,
+    body.dark-mode .limitation-card:hover,
+    body.dark-mode .fidelity-style-card:hover {
+      background: #252525;
+      border-color: #444;
+    }
+
+    body.dark-mode .what-section {
+      border-top-color: #333;
+      border-bottom-color: #333;
+    }
+
+    body.dark-mode .what-item::before {
+      color: #e5e5e5;
+    }
+
+    body.dark-mode .agent-number {
+      background: #e5e5e5;
+      color: #0a0a0a;
+    }
+
+    body.dark-mode .capability-icon {
+      background: #e5e5e5;
+    }
+
+    body.dark-mode .capability-icon svg {
+      color: #0a0a0a;
+    }
+
+    body.dark-mode .interactive-keyword {
+      background: #333;
+      border-color: #444;
+      color: #e5e5e5;
+    }
+
+    body.dark-mode .interactive-keyword:hover,
+    body.dark-mode .interactive-keyword.active {
+      background: #e5e5e5;
+      border-color: #e5e5e5;
+      color: #0a0a0a;
+    }
+
+    body.dark-mode .demo-btn-circle,
+    body.dark-mode .demo-btn-pill {
+      background: #252525;
+      border-color: #444;
+    }
+
+    body.dark-mode .demo-btn-send {
+      background: #e5e5e5;
+      color: #0a0a0a;
+    }
+
+    body.dark-mode .style-ref-row.style-ref-header {
+      background: #e5e5e5;
+      color: #0a0a0a;
+    }
+
+    body.dark-mode .style-ref-cell.code-text {
+      background: #252525;
+      border-color: #444;
+    }
+
+    body.dark-mode .formula-display {
+      background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+      border-color: #444;
+    }
+
+    body.dark-mode .example-code {
+      background: #252525;
+      border-color: #444;
+    }
+
+    body.dark-mode .fidelity-prompt-bar {
+      background: #252525;
+      border-top-color: #333;
+    }
+
+    body.dark-mode .collab-param-row {
+      background: rgba(0, 0, 0, 0.3);
+      border-color: #333;
+    }
+
+    body.dark-mode .collab-param-row.collab-param-filled {
+      background: #252525;
+    }
+
+    body.dark-mode .collab-param-value {
+      color: #999;
+    }
+
+    body.dark-mode .collab-param-row.collab-param-filled .collab-param-value {
+      color: #e5e5e5;
+    }
+
+    body.dark-mode .limitation-check-list li {
+      color: #e5e5e5;
+    }
+
+    body.dark-mode .formula-display {
+      color: #e5e5e5;
+    }
+
+    body.dark-mode .motion-vector-list li {
+      color: #e5e5e5;
+    }
+
+    body.dark-mode .motion-vector-list li code {
+      color: #999;
+      background: #252525;
+      border-color: #444;
+    }
+
+    body.dark-mode .prompt-demo-text {
+      color: #e5e5e5;
+    }
+
+    body.dark-mode .lang-option {
+      color: #999;
+    }
+
+    body.dark-mode .lang-option-active {
+      color: #e5e5e5;
+    }
+
+    body.dark-mode .icon-toggle {
+      background: #252525;
+      border-color: #444;
+    }
+
+    body.dark-mode .icon-toggle:hover {
+      background: #333;
+      border-color: #555;
+    }
+
+    body.dark-mode .language-toggle {
+      background: #252525;
+      border-color: #444;
+    }
+
+    body.dark-mode .lang-slider {
+      background: #e5e5e5;
+    }
+
+    body.dark-mode .icon-toggle svg {
+      color: #e5e5e5;
+    }
+
+    body.dark-mode .collab-param-label {
+      color: #999;
+    }
+
+    body.dark-mode .example-code {
+      color: #999;
+    }
+
+    body.dark-mode .motion-syntax-title {
+      color: #e5e5e5;
+    }
+
+    body.dark-mode .example-title {
+      color: #e5e5e5;
+    }
+
+    body.dark-mode .fidelity-variations-title {
+      color: #999;
+    }
+
+    body.dark-mode .limitation-cross-list li strong {
+      color: #e5e5e5;
+    }
+
+    body.dark-mode .collab-text {
+      color: #999;
+    }
+
+    body.dark-mode .collab-text strong {
+      color: #e5e5e5;
+    }
+
+    body.dark-mode .collab-angle-display {
+      color: #999;
+      border-left-color: #444;
+    }
+
+    body.dark-mode .collab-angle-display.collab-angle-active {
+      color: #999;
+      border-left-color: #e5e5e5;
+    }
+
+    body.dark-mode .collab-json-status {
+      color: #999;
+    }
+
+    body.dark-mode .collab-json-status.collab-json-ready {
+      color: #e5e5e5;
+    }
+
+    body.dark-mode .collab-cursor-blink {
+      background: #e5e5e5;
+    }
+
+    body.dark-mode .production-code-snippet {
+      color: #999;
+    }
+
+    body.dark-mode .production-code-highlight {
+      color: #e5e5e5;
+    }
+
+    body.dark-mode .agent-role {
+      color: #999;
+    }
+
+    body.dark-mode .agent-description {
+      color: #999;
+    }
+
+    body.dark-mode .capability-description {
+      color: #999;
+    }
+
+    body.dark-mode .what-item-desc {
+      color: #999;
+    }
+
+    body.dark-mode .section-subtitle,
+    body.dark-mode .hero-subtitle,
+    body.dark-mode .cta-subtitle {
+      color: #999;
+    }
+
+    body.dark-mode .fidelity-prompt-text {
+      color: #999;
+    }
+
+    body.dark-mode .fidelity-style-info p {
+      color: #999;
+    }
+
+    body.dark-mode .limitation-cross-list li {
+      color: #999;
+    }
+
+    body.dark-mode .limitation-card-desc {
+      color: #999;
+    }
+
+    body.dark-mode .production-card-desc {
+      color: #999;
+    }
+
+    body.dark-mode .keyword-reveal-desc {
+      color: #999;
+    }
+
+    body.dark-mode .keyword-reveal-label {
+      color: #e5e5e5;
+    }
+
+    body.dark-mode .motion-syntax-desc {
+      color: #999;
+    }
+
+    body.dark-mode .style-ref-cell {
+      color: #999;
     }
