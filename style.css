@@ -199,6 +199,7 @@
     /* Left Content Panel */
     .content-panel {
       flex: 1;
+      height: calc(100vh - 64px); /* Full height minus navbar */
       overflow-y: auto;
       overflow-x: hidden;
       padding: 60px 80px 120px;
@@ -206,7 +207,7 @@
       -webkit-overflow-scrolling: touch;
     }
 
-    /* Right Fixed Image */
+    /* Right Fixed Image Panel - Enhanced with Layers */
     .image-panel {
       position: fixed;
       right: 0;
@@ -219,16 +220,142 @@
       background: #000;
     }
 
-    .image-panel img {
-      width: auto;
+    /* Panel Image (Static - fades out on scroll) */
+    .panel-image {
+      position: absolute;
+      width: 100%;
       height: 100%;
-      aspect-ratio: 9/16;
       object-fit: cover;
-      transition: transform 0.6s ease-out;
+      object-position: center;
+      transition: opacity 0.8s cubic-bezier(0.4, 0.0, 0.2, 1),
+                  transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+      z-index: 1;
     }
 
-    .image-panel.scrolled img {
-      transform: scale(1.05);
+    /* Panel Video (Hidden initially, appears on scroll) */
+    .panel-video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0;
+      z-index: 2;
+      transition: opacity 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+    }
+
+    /* Floating Logo Overlay - New 3-line structure */
+    .floating-logo {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 10;
+      transition: all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .logo-line {
+      color: #ffffff;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+      transition: all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .logo-line-top {
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .logo-line-main {
+      font-size: 48px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .logo-line-bottom {
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      opacity: 0.65;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Logo during video playback - left-aligned stacked layout */
+    .floating-logo.video-active {
+      left: 48px;
+      top: 50%;
+      transform: translate(0, -50%);
+      text-align: left;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .floating-logo.video-active .logo-line-top {
+      font-size: 13px;
+      opacity: 0.75;
+      letter-spacing: 0.15em;
+    }
+
+    .floating-logo.video-active .logo-line-main {
+      font-size: 56px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .floating-logo.video-active .logo-line-bottom {
+      font-size: 11px;
+      opacity: 0.55;
+      letter-spacing: 0.2em;
+    }
+
+    /* Logo hidden state */
+    .floating-logo.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+
+    /* Blur Transition Overlay - Starts with blur */
+    .blur-transition-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0); /* No dark overlay */
+      backdrop-filter: blur(16px); /* Initial blur */
+      z-index: 9;
+      pointer-events: none;
+      transition: all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+    }
+
+    /* When cleared - bright and sharp */
+    .blur-transition-overlay.cleared {
+      background: rgba(0, 0, 0, 0);
+      backdrop-filter: blur(0px);
+    }
+
+    /* When active - blur transition for video */
+    .blur-transition-overlay.active {
+      backdrop-filter: blur(20px);
+      background: rgba(0, 0, 0, 0);
+    }
+
+    /* Legacy class for backwards compatibility */
+    .image-panel.scrolled .panel-image {
+      transform: scale(1.02);
     }
 
     /* Hero Section - Powerful & Concise */
@@ -260,7 +387,7 @@
       line-height: 1.4;
       color: #666;
       margin-bottom: 40px;
-      max-width: 560px;
+      max-width: 860px;
     }
 
     .hero-cta {
@@ -619,10 +746,46 @@
         top: 0;
       }
 
-      .image-panel img {
+      .panel-image,
+      .panel-video {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: center;
+      }
+
+      /* Smaller logo on tablets */
+      .floating-logo {
+        gap: 4px;
+      }
+
+      .logo-line-top {
+        font-size: 13px;
+      }
+
+      .logo-line-main {
+        font-size: 36px;
+      }
+
+      .logo-line-bottom {
+        font-size: 11px;
+      }
+
+      .floating-logo.video-active {
+        left: 32px;
+        gap: 6px;
+      }
+
+      .floating-logo.video-active .logo-line-top {
+        font-size: 11px;
+      }
+
+      .floating-logo.video-active .logo-line-main {
+        font-size: 42px;
+      }
+
+      .floating-logo.video-active .logo-line-bottom {
+        font-size: 9px;
       }
 
       .hero-title {
@@ -658,6 +821,41 @@
       .navbar {
         padding: 0 16px;
         height: 56px;
+      }
+
+      /* Mobile-optimized floating logo */
+      .floating-logo {
+        gap: 3px;
+        top: 25%;
+      }
+
+      .logo-line-top {
+        font-size: 11px;
+      }
+
+      .logo-line-main {
+        font-size: 28px;
+      }
+
+      .logo-line-bottom {
+        font-size: 9px;
+      }
+
+      .floating-logo.video-active {
+        left: 20px;
+        gap: 4px;
+      }
+
+      .floating-logo.video-active .logo-line-top {
+        font-size: 9px;
+      }
+
+      .floating-logo.video-active .logo-line-main {
+        font-size: 32px;
+      }
+
+      .floating-logo.video-active .logo-line-bottom {
+        font-size: 8px;
       }
 
       .navbar-brand {
@@ -865,6 +1063,41 @@
 
       .navbar-right {
         gap: 8px;
+      }
+
+      /* Extra small logo adjustments */
+      .floating-logo {
+        gap: 2px;
+        top: 20%;
+      }
+
+      .logo-line-top {
+        font-size: 10px;
+      }
+
+      .logo-line-main {
+        font-size: 24px;
+      }
+
+      .logo-line-bottom {
+        font-size: 8px;
+      }
+
+      .floating-logo.video-active {
+        left: 16px;
+        gap: 3px;
+      }
+
+      .floating-logo.video-active .logo-line-top {
+        font-size: 8px;
+      }
+
+      .floating-logo.video-active .logo-line-main {
+        font-size: 28px;
+      }
+
+      .floating-logo.video-active .logo-line-bottom {
+        font-size: 7px;
       }
 
       .icon-toggle,
@@ -2194,11 +2427,11 @@
     }
 
     body.dark-mode .lang-option-active {
-      color: #fff;
+      color: #000000;
     }
 
     body.dark-mode .lang-option-active:hover {
-      color: #fff;
+      color: #056879;
     }
 
     body.dark-mode .icon-toggle {
@@ -2342,4 +2575,10 @@
 
     body.dark-mode .style-ref-cell {
       color: #999;
+    }
+
+    /* Dark Mode - Floating Logo */
+    body.dark-mode .logo-line {
+      color: #ffffff;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.9);
     }
