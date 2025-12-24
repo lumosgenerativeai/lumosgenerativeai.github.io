@@ -1,10 +1,42 @@
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
     
     body {
       font-family: 'Inter', -apple-system, sans-serif;
       background: #ffffff;
       color: #1a1a1a;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    html {
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+      -moz-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    /* Touch devices optimization */
+    @media (hover: none) and (pointer: coarse) {
+      .hero-cta,
+      .navbar-cta,
+      .icon-toggle,
+      .lang-option,
+      .demo-btn-send {
+        min-height: 44px;
+        min-width: 44px;
+      }
+
+      .interactive-keyword {
+        min-height: 36px;
+        display: inline-flex;
+        align-items: center;
+      }
     }
 
     /* Navbar */
@@ -103,7 +135,7 @@
       padding: 6px 14px;
       font-size: 13px;
       font-weight: 600;
-      color: #666;
+      color: #ccc;
       background: transparent;
       border: none;
       cursor: pointer;
@@ -111,8 +143,16 @@
       z-index: 2;
     }
 
+    .lang-option:hover {
+      color: #999;
+    }
+
     .lang-option-active {
-      color: #1a1a1a;
+      color: #000;
+    }
+
+    .lang-option-active:hover {
+      color: #000;
     }
 
     .lang-slider {
@@ -160,8 +200,10 @@
     .content-panel {
       flex: 1;
       overflow-y: auto;
+      overflow-x: hidden;
       padding: 60px 80px 120px;
       background: #ffffff;
+      -webkit-overflow-scrolling: touch;
     }
 
     /* Right Fixed Image */
@@ -566,17 +608,33 @@
       .content-panel {
         max-width: 100%;
         padding: 60px 40px 80px;
+        margin-right: 0 !important;
       }
 
       .image-panel {
         position: relative;
-        width: 100%;
-        height: 60vh;
+        width: 100% !important;
+        height: 50vh;
+        min-height: 400px;
         top: 0;
+      }
+
+      .image-panel img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
 
       .hero-title {
         font-size: 48px;
+      }
+
+      .hero-subtitle {
+        font-size: 20px;
+      }
+
+      .section-title {
+        font-size: 32px;
       }
 
       .capabilities-grid {
@@ -586,35 +644,376 @@
       .limitations-grid {
         grid-template-columns: 1fr;
       }
+
+      .fidelity-style-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 768px) {
+      .split-container {
+        padding-top: 56px;
+      }
+
       .navbar {
-        padding: 0 24px;
+        padding: 0 16px;
+        height: 56px;
+      }
+
+      .navbar-brand {
+        font-size: 14px;
+        max-width: 140px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .navbar-right {
+        gap: 12px;
+      }
+
+      .navbar-cta {
+        padding: 8px 16px;
+        font-size: 13px;
+      }
+
+      .navbar-cta [data-lang="en"],
+      .navbar-cta [data-lang="tr"] {
+        display: none !important;
+      }
+
+      .navbar-cta::after {
+        content: 'Early Access';
+      }
+
+      body.lang-tr .navbar-cta::after {
+        content: 'Erken Erişim';
       }
 
       .content-panel {
-        padding: 40px 24px 60px;
+        padding: 32px 20px 60px;
+      }
+
+      .image-panel {
+        height: 40vh;
+        min-height: 300px;
+      }
+
+      .hero-section {
+        padding-top: 20px;
+        margin-bottom: 60px;
+      }
+
+      .hero-eyebrow {
+        font-size: 11px;
+        margin-bottom: 16px;
       }
 
       .hero-title {
-        font-size: 36px;
+        font-size: 32px;
+        line-height: 1.1;
+        margin-bottom: 16px;
+      }
+
+      .hero-subtitle {
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 28px;
+      }
+
+      .hero-cta {
+        padding: 14px 28px;
+        font-size: 15px;
+        width: 100%;
+        justify-content: center;
       }
 
       .section-title {
-        font-size: 28px;
+        font-size: 26px;
+      }
+
+      .section-subtitle {
+        font-size: 16px;
       }
 
       .what-title {
-        font-size: 28px;
+        font-size: 26px;
+      }
+
+      .what-section {
+        padding: 40px 0;
+        margin-bottom: 60px;
+      }
+
+      .what-item {
+        margin-bottom: 24px;
+        padding-left: 32px;
+      }
+
+      .what-item-title {
+        font-size: 18px;
+      }
+
+      .what-item-desc {
+        font-size: 15px;
       }
 
       .agent-timeline {
-        padding-left: 50px;
+        padding-left: 40px;
       }
 
       .agent-number {
-        left: -50px;
+        left: -40px;
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+      }
+
+      .agent-content {
+        padding: 24px;
+      }
+
+      .agent-title {
+        font-size: 20px;
+      }
+
+      .agent-description {
+        font-size: 15px;
+      }
+
+      .capability-card {
+        padding: 24px;
+      }
+
+      .capability-title {
+        font-size: 18px;
+      }
+
+      .cta-section {
+        padding: 60px 24px;
+        margin-bottom: 40px;
+      }
+
+      .cta-title {
+        font-size: 28px;
+      }
+
+      .cta-subtitle {
+        font-size: 16px;
+      }
+
+      .production-card {
+        padding: 24px;
+      }
+
+      .production-card-desc {
+        font-size: 14px;
+        max-width: 100%;
+      }
+
+      .production-grid-section,
+      .pipeline-section,
+      .capabilities-section,
+      .limitations-section,
+      .visual-fidelity-section,
+      .prompt-guide-section,
+      .style-reference-section,
+      .motion-dynamics-section,
+      .motion-formula-section,
+      .collaboration-sim-section {
+        margin-bottom: 60px;
+      }
+
+      .prompt-demo-box {
+        padding: 20px;
+      }
+
+      .prompt-demo-text {
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .interactive-keyword {
+        padding: 3px 8px;
+        font-size: 14px;
+        margin: 1px 2px;
+      }
+
+      .keyword-reveal-container {
+        padding: 20px;
+      }
+
+      .keyword-reveal-title {
+        font-size: 18px;
+      }
+
+      .keyword-reveal-desc {
+        font-size: 14px;
+      }
+    }
+
+    /* Extra Small Screens */
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 0 12px;
+      }
+
+      .navbar-brand {
+        font-size: 13px;
+        max-width: 100px;
+      }
+
+      .navbar-right {
+        gap: 8px;
+      }
+
+      .icon-toggle,
+      .demo-btn-circle {
+        width: 32px;
+        height: 32px;
+      }
+
+      .icon-toggle svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .language-toggle {
+        padding: 2px;
+      }
+
+      .lang-option {
+        padding: 5px 10px;
+        font-size: 12px;
+      }
+
+      .navbar-cta {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+
+      .content-panel {
+        padding: 24px 16px 48px;
+      }
+
+      .hero-title {
+        font-size: 28px;
+        line-height: 1.15;
+      }
+
+      .hero-subtitle {
+        font-size: 15px;
+      }
+
+      .hero-cta {
+        padding: 12px 24px;
+        font-size: 14px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      .section-subtitle {
+        font-size: 15px;
+      }
+
+      .what-title {
+        font-size: 24px;
+      }
+
+      .cta-title {
+        font-size: 26px;
+      }
+
+      .agent-timeline {
+        padding-left: 32px;
+      }
+
+      .agent-number {
+        left: -32px;
+        width: 28px;
+        height: 28px;
+        font-size: 11px;
+      }
+
+      .agent-content,
+      .capability-card,
+      .limitation-card,
+      .production-card,
+      .prompt-demo-box,
+      .keyword-reveal-container {
+        padding: 20px;
+      }
+
+      .production-card-title,
+      .agent-title {
+        font-size: 18px;
+      }
+
+      .capability-title {
+        font-size: 17px;
+      }
+
+      .what-item {
+        padding-left: 28px;
+      }
+
+      .what-item-title {
+        font-size: 17px;
+      }
+
+      .what-item-desc,
+      .agent-description,
+      .capability-description,
+      .production-card-desc {
+        font-size: 14px;
+      }
+
+      .prompt-demo-text {
+        font-size: 14px;
+      }
+
+      .interactive-keyword {
+        font-size: 13px;
+        padding: 2px 6px;
+      }
+
+      .demo-btn-pill {
+        padding: 0 12px;
+        font-size: 12px;
+      }
+
+      .fidelity-prompt-text {
+        font-size: 11px;
+      }
+
+      .motion-vector-list li code,
+      .style-ref-cell.code-text {
+        font-size: 11px;
+      }
+
+      .formula-display {
+        font-size: 13px;
+        padding: 20px;
+      }
+
+      .example-code {
+        font-size: 12px;
+        padding: 16px;
+      }
+
+      .collab-text {
+        font-size: 13px;
+      }
+
+      .collab-topic-display {
+        font-size: 18px;
+      }
+
+      .production-card-large,
+      .production-card-tall {
+        min-height: 240px;
       }
     }
 
@@ -1051,6 +1450,12 @@
       .style-ref-row {
         grid-template-columns: 1fr;
         gap: 12px;
+        padding: 16px 20px;
+      }
+
+      .style-ref-cell.code-text {
+        font-size: 12px;
+        padding: 6px 10px;
       }
 
       .formula-display {
@@ -1060,6 +1465,10 @@
 
       .limitations-grid {
         grid-template-columns: 1fr;
+      }
+
+      .agent-timeline::before {
+        left: 16px;
       }
     }
 
@@ -1124,6 +1533,7 @@
       color: #666;
       line-height: 1.6;
       max-width: 90%;
+      margin-bottom: 20px;
     }
 
     .production-card-visual {
@@ -1135,9 +1545,13 @@
     }
 
     .production-visual-script {
-      top: 50%;
-      left: 0%;
-      padding: 24px;
+      position: relative;
+      top: auto;
+      bottom: auto;
+      left: auto;
+      right: auto;
+      margin-top: 24px;
+      padding: 0;
     }
 
     .production-code-snippet {
@@ -1566,14 +1980,18 @@
       .production-card-tall {
         grid-column: span 1;
         grid-row: span 1;
+        min-height: 280px;
       }
 
       .collab-sim-grid {
         grid-template-columns: 1fr;
+        gap: 32px;
       }
 
       .collab-context-card {
-        display: none;
+        position: relative;
+        top: 0;
+        order: -1;
       }
 
       .fidelity-style-grid {
@@ -1768,11 +2186,19 @@
     }
 
     body.dark-mode .lang-option {
-      color: #999;
+      color: #555;
+    }
+
+    body.dark-mode .lang-option:hover {
+      color: #888;
     }
 
     body.dark-mode .lang-option-active {
-      color: #e5e5e5;
+      color: #fff;
+    }
+
+    body.dark-mode .lang-option-active:hover {
+      color: #fff;
     }
 
     body.dark-mode .icon-toggle {

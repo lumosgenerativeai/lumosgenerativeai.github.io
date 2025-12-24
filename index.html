@@ -46,8 +46,8 @@
       </div>
 
       <button class="navbar-cta" onclick="window.location.href='/docugen/index.html'">
-        <span data-lang="en">Get Started</span>
-        <span data-lang="tr">Başlayın</span>
+        <span data-lang="en">Get Early Access</span>
+        <span data-lang="tr">Erken Erişim</span>
       </button>
     </div>
   </nav>
@@ -73,8 +73,8 @@
           <span data-lang="tr">Düz metni akıllı senaryo yazımı, uyarlanabilir görseller ve duygusal sesle belgesel kalitesinde videoya dönüştüren ilk otonom üretim hattı.</span>
         </p>
         <button class="hero-cta" onclick="window.location.href='/docugen/index.html'">
-          <span data-lang="en">Start Creating</span>
-          <span data-lang="tr">Oluşturmaya Başlayın</span>
+          <span data-lang="en">Get Early Access</span>
+          <span data-lang="tr">Erken Erişim</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
@@ -953,8 +953,8 @@
           <span data-lang="tr">Vizyonunuzu tanımlayın, yapay zeka ajanlarımız üretimi yönetsin.</span>
         </p>
         <button class="hero-cta" onclick="window.location.href='/docugen/index.html'">
-          <span data-lang="en">Start Creating for Free</span>
-          <span data-lang="tr">Ücretsiz Oluşturmaya Başlayın</span>
+          <span data-lang="en">Get Early Access</span>
+          <span data-lang="tr">Erken Erişim</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
@@ -1006,17 +1006,30 @@
 
     // Calculate and set image panel width
     function updateImagePanelWidth() {
-      const viewportHeight = window.innerHeight - 64; // minus navbar
-      const imageWidth = viewportHeight * (9 / 16);
       const imagePanel = document.getElementById('imagePanel');
       const contentPanel = document.querySelector('.content-panel');
 
-      if (imagePanel) {
-        imagePanel.style.width = imageWidth + 'px';
-      }
+      // Only apply dynamic width on desktop (> 1200px)
+      if (window.innerWidth > 1200) {
+        const viewportHeight = window.innerHeight - 64; // minus navbar
+        const imageWidth = viewportHeight * (9 / 16);
 
-      if (contentPanel) {
-        contentPanel.style.marginRight = imageWidth + 'px';
+        if (imagePanel) {
+          imagePanel.style.width = imageWidth + 'px';
+        }
+
+        if (contentPanel) {
+          contentPanel.style.marginRight = imageWidth + 'px';
+        }
+      } else {
+        // Reset styles for mobile/tablet
+        if (imagePanel) {
+          imagePanel.style.width = '';
+        }
+
+        if (contentPanel) {
+          contentPanel.style.marginRight = '';
+        }
       }
     }
 
