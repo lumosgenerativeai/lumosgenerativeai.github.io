@@ -1,992 +1,689 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mindplace | VisualStoryteller</title>
+  <title>Lumos Generative AI — Yeni Vizyon</title>
+  <meta name="description" content="Film ve animasyon endüstrisini yapay zeka ile dönüştürmek için kuruldu. Mindplace + Produckt.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0c;
+      --bg-surface: #111115;
+      --bg-elevated: #1a1a20;
+      --border: #2a2a32;
+      --text: #e8e6e3;
+      --text-muted: #8a8a96;
+      --text-dim: #5a5a66;
+      --accent: #c8a86e;
+      --accent-dim: rgba(200, 168, 110, 0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- Header --- */
+    .header {
+      text-align: center;
+      padding: 100px 24px 60px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 32px;
+    }
+
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+
+    .header .subtitle {
+      font-size: 18px;
+      color: var(--text-muted);
+      font-weight: 300;
+      max-width: 600px;
+      margin: 0 auto;
+      font-style: italic;
+    }
+
+    /* --- Main --- */
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* --- Sections --- */
+    section {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-of-type { border-bottom: none; }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 32px;
+      color: var(--text);
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 32px;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-top: 24px;
+      margin-bottom: 12px;
+      color: var(--accent);
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: var(--text-muted);
+    }
+
+    strong { color: var(--text); font-weight: 600; }
+
+    ul, ol {
+      margin-bottom: 16px;
+      padding-left: 24px;
+      color: var(--text-muted);
+    }
+
+    li { margin-bottom: 6px; }
+    li strong { color: var(--text); }
+
+    blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 12px 20px;
+      margin: 24px 0;
+      background: var(--accent-dim);
+      border-radius: 0 8px 8px 0;
+    }
+
+    blockquote p {
+      color: var(--text-muted);
+      margin-bottom: 0;
+      font-size: 15px;
+    }
+
+    /* --- Highlight Box --- */
+    .highlight {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin: 24px 0;
+      text-align: center;
+    }
+
+    .highlight p {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
+
+    /* --- Tables --- */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 24px 0;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    thead { background: var(--bg-elevated); }
+
+    th {
+      text-align: left;
+      padding: 14px 18px;
+      font-weight: 600;
+      color: var(--text);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 12px 18px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    tbody tr:hover { background: rgba(200, 168, 110, 0.03); }
+
+    /* --- Diagram --- */
+    .diagram {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 40px 24px;
+      margin: 32px 0;
+      text-align: center;
+    }
+
+    .diagram-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .diagram-node {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      min-width: 200px;
+      max-width: 280px;
+      flex: 1;
+    }
+
+    .diagram-node h4 {
+      margin-top: 0;
+      font-size: 16px;
+    }
+
+    .diagram-node p {
+      font-size: 13px;
+      margin-bottom: 0;
+    }
+
+    .diagram-arrow {
+      color: var(--accent);
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+
+    .diagram-center {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .diagram-center p {
+      color: var(--text-dim);
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .diagram-center strong {
+      color: var(--accent);
+      font-size: 16px;
+    }
+
+    .feedback-arrows {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .feedback-item {
+      font-size: 12px;
+      color: var(--text-dim);
+      max-width: 220px;
+      text-align: center;
+    }
+
+    .feedback-item .arrow {
+      color: var(--accent);
+      font-size: 18px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* --- Roadmap --- */
+    .roadmap {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .roadmap-phase {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      position: relative;
+      padding-left: 36px;
+    }
+
+    .roadmap-phase::before {
+      content: '';
+      position: absolute;
+      left: 16px;
+      top: 28px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .roadmap-phase h4 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .roadmap-phase ul {
+      margin-bottom: 0;
+      font-size: 14px;
+    }
+
+    /* --- Footer --- */
+    .footer {
+      text-align: center;
+      padding: 48px 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 640px) {
+      .header { padding: 64px 20px 40px; }
+      section { padding: 48px 0; }
+      h2 { font-size: 24px; }
+      .diagram-flow { flex-direction: column; }
+      .diagram-arrow { transform: rotate(90deg); }
+      th, td { padding: 10px 12px; font-size: 13px; }
+    }
+  </style>
 </head>
-<body class="lang-en">
+<body>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <a href="#" class="navbar-brand">Mindplace | VisualStoryteller</a>
-    <div class="navbar-right">
-      <!-- Dark Mode Toggle -->
-      <div class="toggle-container">
-        <button class="icon-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">
-          <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="5"/>
-            <line x1="12" y1="1" x2="12" y2="3"/>
-            <line x1="12" y1="21" x2="12" y2="23"/>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-            <line x1="1" y1="12" x2="3" y2="12"/>
-            <line x1="21" y1="12" x2="23" y2="12"/>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-          </svg>
-          <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-          </svg>
-        </button>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-brand">Lumos Generative AI</div>
+    <h1>Yeni Vizyon</h1>
+    <p class="subtitle">Stratejik geçiş dokümanı. PoC'dan ürüne evrilirken alınan kararlar, yeni yapı ve yol haritası.</p>
+  </header>
+
+  <main class="container">
+
+    <!-- 1. Neden Değişiyoruz -->
+    <section>
+      <h2>1. Neden Değişiyoruz?</h2>
+
+      <h3>PoC'dan Çıkan Ders</h3>
+      <p>Mindplace PoC olarak başarılı bir teknoloji demosu oldu. Agentic pipeline'lar çalışıyor, modüller üretiyor, AI altyapısı kanıtlanmış durumda. Ama PoC süreci bir gerçeği de net gösterdi:</p>
+
+      <div class="highlight">
+        <p>Herkese hitap etmeye çalışan bir ürün, kimseye gerçekten hitap edemiyor.</p>
       </div>
 
-      <!-- Language Toggle -->
-      <div class="toggle-container">
-        <div class="language-toggle">
-          <button class="lang-option lang-option-active" data-lang-btn="en" onclick="setLanguage('en')">EN</button>
-          <button class="lang-option" data-lang-btn="tr" onclick="setLanguage('tr')">TR</button>
-          <div class="lang-slider"></div>
+      <p>PoC'da aynı anda hedeflenen kitleler:</p>
+      <ul>
+        <li>Reklam verenler (Ads)</li>
+        <li>Belgesel/eğitim içerik üreticileri (VST, DocuGen)</li>
+        <li>Tek seferlik görsel/video ihtiyacı olanlar (Asset Studio Lab)</li>
+        <li>Animasyon/çizgi film üreticileri</li>
+        <li>Oyun geliştiricileri (GamePlace)</li>
+        <li>Prodüksiyon stüdyoları (XPlace B2B)</li>
+      </ul>
+
+      <p>Bu genişlik, her bir segmente sığ bir deneyim sunulmasına, onboarding sürecinin karmaşıklaşmasına ve gelir modelinin öngörülememesine yol açtı. Ayrıca geliştirme kaynakları 10+ farklı ürün hattına dağıldı.</p>
+
+      <h3>Karar: Radikal Odaklanma</h3>
+      <p><strong>Sadece film ve animasyon endüstrisi.</strong> Tek sektör, tek müşteri profili, tek dil.</p>
+      <p>Bu daralmayı bir kayıp olarak değil, PoC'un en değerli çıktısı olarak görüyoruz. Geniş denemeler sayesinde en güçlü olduğumuz alanı — sinematik yapay zeka araçları — net olarak tespit ettik.</p>
+    </section>
+
+    <!-- 2. Eski vs Yeni -->
+    <section>
+      <h2>2. Eski vs Yeni: Tek Bakışta</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Eski (PoC)</th>
+              <th>Yeni (Lumos Generative AI)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Odak</strong></td><td>Her sektöre AI araçları</td><td>Film ve animasyon endüstrisi</td></tr>
+            <tr><td><strong>Müşteri</strong></td><td>Herkes (dağınık)</td><td>Film/animasyon üreticileri (niş, iyi tanımlanmış)</td></tr>
+            <tr><td><strong>Ürün sayısı</strong></td><td>10+ bağımsız ürün</td><td>2 birbirini besleyen iş kolu</td></tr>
+            <tr><td><strong>Marka</strong></td><td>Mindplace SaaS + XPlace B2B</td><td>Mindplace (araç) + Produckt (içerik)</td></tr>
+            <tr><td><strong>Gelir</strong></td><td>Belirsiz, öngörülemez</td><td>SaaS + Custom Deployment + İçerik</td></tr>
+            <tr><td><strong>Ekip enerjisi</strong></td><td>10 farklı yöne dağılmış</td><td>2 komplementer odağa yoğunlaşmış</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 3. Yeni Organizasyon -->
+    <section>
+      <h2>3. Yeni Organizasyon: İki İş Kolu</h2>
+      <p>Lumos Generative AI iki koldan oluşuyor. İkisi de film/animasyon endüstrisine hizmet ediyor, birbirini besliyor, ama farklı değer üretiyor.</p>
+
+      <h3>Kol 1: Mindplace — Araç</h3>
+      <p><strong>Misyon:</strong> Film ve animasyon üreticileri için yapay zeka destekli üretim araçları.</p>
+      <ul>
+        <li>Senaryo yazımı, storyboard oluşturma, sahne tasarımı, karakter tutarlılığı, panoramik ortam üretimi gibi pre-production süreçlerinde AI destekli modüller sunuyor</li>
+        <li>PoC'daki XPlace modülleri revize edilip zenginleştirilerek yeni Mindplace modülleri olacak</li>
+        <li>Devre dışı bırakılan alanların (Asset Studio, VST pipeline) altyapı ve mimari kazanımları yeni sisteme taşınacak</li>
+      </ul>
+
+      <h4>İki Sunuş Modeli</h4>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Mindplace SaaS</th>
+              <th>Mindplace B2B</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Model</strong></td><td>Self-serve platform, subscription</td><td>Stüdyoya özel site/uygulama, ayrı bütçe</td></tr>
+            <tr><td><strong>Müşteri</strong></td><td>Bağımsız yapımcılar, küçük-orta stüdyolar</td><td>Büyük prodüksiyon stüdyoları</td></tr>
+            <tr><td><strong>Özelleştirme</strong></td><td>Standart modül seti</td><td>Stüdyo ihtiyaçlarına göre özelleştirilmiş</td></tr>
+            <tr><td><strong>Ölçeklenebilirlik</strong></td><td>Yüksek (self-serve)</td><td>Proje bazlı (her deployment ayrı gelir)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <blockquote>
+        <p><strong>Not:</strong> B2B modeli on-site kurulum değil. Stüdyoya özel bir uygulama/site kurulumu yapılıyor, ayrı bütçelendirme ile. Consulting tuzağına düşmeden enterprise geliri sağlıyor.</p>
+      </blockquote>
+
+      <h4>Devre Dışı Bırakılan Alanlar</h4>
+      <ul>
+        <li>Reklam, eğitim, seri üretim amaçlı workflowlar (VST/DocuGen)</li>
+        <li>Tek seferlik üretimler (One-shot Lab / Asset Studio)</li>
+        <li>AI tabanlı oyun motoru (GamePlace)</li>
+        <li>Mindplace / XPlace isim ayrımı</li>
+      </ul>
+
+      <h3>Kol 2: Produckt — İçerik</h3>
+      <p><strong>Misyon:</strong> Kendi teknolojimizle üretilmiş orijinal film ve animasyon içerikleri.</p>
+      <ul>
+        <li>Mindplace araçlarını kullanarak güçlü senaryolara ve çarpıcı görsellere sahip orijinal mini seriler üretiyor</li>
+        <li>Teknoloji gücümüzü somut, izlenebilir yapımlarla kanıtlıyor</li>
+        <li>İçerikleri dijital kanallarımızda yayınlayarak hem marka bilinirliği hem gelir üretiyor</li>
+      </ul>
+
+      <p><strong>İlk hedef:</strong> En az 5 orijinal mini seri (ArloVivid, Persephone, Mingo ve diğerleri)</p>
+
+      <h4>Dağıtım Kanalları</h4>
+      <ul>
+        <li>produckt.com (ana içerik platformu)</li>
+        <li>mindplace.app (Mindplace TV showcase)</li>
+        <li>Sosyal medya platformları</li>
+      </ul>
+
+      <h4>İş Geliştirme Fonksiyonu</h4>
+      <ul>
+        <li>Yatırımcı turlarında kaldıraç: "Bu içerikleri kendi araçlarımızla ürettik"</li>
+        <li>TV/Platform lisans anlaşmaları</li>
+        <li>Yapımcılarla ücretli proje bazlı iş birlikleri</li>
+      </ul>
+    </section>
+
+    <!-- 4. Beslenme Döngüsü -->
+    <section>
+      <h2>4. İki Kol Nasıl Birbirini Besliyor?</h2>
+
+      <div class="diagram">
+        <div class="diagram-flow">
+          <div class="diagram-node">
+            <h4>Mindplace</h4>
+            <p>Araçları geliştir, yapımcılara sun</p>
+          </div>
+          <div class="diagram-arrow">&#8644;</div>
+          <div class="diagram-node">
+            <h4>Produckt</h4>
+            <p>Araçları kullanarak orijinal içerik üret</p>
+          </div>
+        </div>
+
+        <div class="feedback-arrows">
+          <div class="feedback-item">
+            <span class="arrow">&#8594;</span>
+            Araçlar Produckt'ın üretim kalitesini artırıyor
+          </div>
+          <div class="feedback-item">
+            <span class="arrow">&#8592;</span>
+            Gerçek üretim feedback'i ürünü iyileştiriyor
+          </div>
+          <div class="feedback-item">
+            <span class="arrow">&#8596;</span>
+            "Bunu bu araçla yaptık" en güçlü showcase
+          </div>
+        </div>
+
+        <div class="diagram-center">
+          <p>Ortak hedef</p>
+          <strong>Film &amp; Animasyon Endüstrisi</strong>
         </div>
       </div>
 
-      <button class="navbar-cta" onclick="window.location.href='#'">
-        <span data-lang="en">Get Early Access</span>
-        <span data-lang="tr">Erken Erişim İste</span>
-      </button>
-    </div>
-  </nav>
+      <p>Bu döngü, Produckt'ın Mindplace için en güçlü müşteri kazanım motoru olmasını sağlıyor. Bir stüdyoya "AI ile storyboard yapabilirsiniz" demek yerine, "ArloVivid'in storyboard'larını bu araçla yaptık, izleyin" demek çok daha ikna edici.</p>
+      <p>Aynı zamanda Produckt ekibi, Mindplace'in en zorlu ve en dürüst beta kullanıcısı oluyor. Gerçek üretim sürecinde çıkan her sürtünme noktası, ürün iyileştirmesine dönüşüyor.</p>
+    </section>
 
-  <!-- Split Layout -->
-  <div class="split-container">
-    
-    <!-- Left: Content Panel -->
-    <div class="content-panel">
-      
-      <!-- Hero Section - Powerful & Concise -->
-      <section class="hero-section fade-in">
-        <div class="hero-eyebrow">
-          <span data-lang="en">AGENTIC AI PRODUCTION SUITE</span>
-          <span data-lang="tr">AJANSAL YAPAY ZEKA ÜRETİM PAKETİ</span>
-        </div>
-        <h1 class="hero-title">
-          <span data-lang="en">Turn Ideas Into<br>Cinematic Stories</span>
-          <span data-lang="tr">Fikirleri Sinematik<br>Hikayelere Dönüştürün</span>
-        </h1>
-        <p class="hero-subtitle">
-          <span data-lang="en">The first autonomous production pipeline that transforms plain text into documentary-grade video with intelligent scripting, adaptive visuals, and emotive audio.</span>
-          <span data-lang="tr">Düz metni akıllı senaryo yazımı, uyarlanabilir görseller ve duygusal sesle belgesel kalitesinde videoya dönüştüren ilk otonom üretim hattı.</span>
-        </p>
-        <button class="hero-cta" onclick="window.location.href='#'">
-          <span data-lang="en">Get Early Access</span>
-          <span data-lang="tr">Erken Erişim İste</span>
-          
-        </button>
-      </section>
+    <!-- 5. Ekip -->
+    <section>
+      <h2>5. Ekip Yapısı</h2>
 
-      <!-- Agent Pipeline Section -->
-      <section class="pipeline-section fade-in">
-        <div class="section-header">
-          <h2 class="section-title">
-            <span data-lang="en">The Agentic Pipeline</span>
-            <span data-lang="tr">Ajansal Üretim Hattı</span>
-          </h2>
-          <p class="section-subtitle">
-            <span data-lang="en">Five specialized AI agents orchestrate every aspect of production, transforming your concept into a polished visual story.</span>
-            <span data-lang="tr">Beş uzman yapay zeka ajanı üretimin her yönünü yönetir ve konseptinizi cilalı bir görsel hikayeye dönüştürür.</span>
-          </p>
-        </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Rol</th><th>Odak</th><th>Kol</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>2 AI Film Üreticisi</strong></td><td>Orijinal içerik üretimi, senaryo, yönetmenlik</td><td>Produckt</td></tr>
+            <tr><td><strong>3 AI/Software Engineer</strong></td><td>Platform geliştirme, modül mühendisliği, altyapı</td><td>Mindplace</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-        <div class="agent-timeline">
-          
-          <!-- Agent 1: Creative Director -->
-          <div class="agent-card">
-            <div class="agent-number">01</div>
-            <div class="agent-content">
-              <div class="agent-role">
-                <span data-lang="en">INQUIRY ENGINE</span>
-                <span data-lang="tr">SORGULAMA MOTORU</span>
-              </div>
-              <h3 class="agent-title">
-                <span data-lang="en">Creative Director</span>
-                <span data-lang="tr">Kreatif Direktör</span>
-              </h3>
-              <p class="agent-description">
-                <span data-lang="en">The entry point of your production. Through natural conversation, this agent extracts the four pillars: <span class="agent-highlight">Subject</span>, <span class="agent-highlight">Narrative Angle</span>, <span class="agent-highlight">Visual Style</span>, and <span class="agent-highlight">Format</span>. It understands context, proposes creative directions, and locks your vision into a production-ready brief.</span>
-                <span data-lang="tr">Üretimin giriş noktası. Doğal konuşma yoluyla bu ajan dört ana unsuru çıkarır: <span class="agent-highlight">Konu</span>, <span class="agent-highlight">Anlatı Açısı</span>, <span class="agent-highlight">Görsel Stil</span> ve <span class="agent-highlight">Format</span>. Bağlamı anlar, yaratıcı yönler önerir ve vizyonunuzu üretime hazır bir brief'e dönüştürür.</span>
-              </p>
-            </div>
-          </div>
+      <p>Ekip doğal olarak iki kola ayrılıyor ama tek organizasyon olarak çalışıyor. Produckt'ın üretim ihtiyaçları Mindplace'in roadmap'ini besliyor; Mindplace'in yeni özellikleri Produckt'ın üretim kalitesini artırıyor.</p>
+    </section>
 
-          <!-- Agent 2: Writer -->
-          <div class="agent-card">
-            <div class="agent-number">02</div>
-            <div class="agent-content">
-              <div class="agent-role">
-                <span data-lang="en">NARRATIVE ARCHITECT</span>
-                <span data-lang="tr">ANLATIM MİMARI</span>
-              </div>
-              <h3 class="agent-title">
-                <span data-lang="en">Writer</span>
-                <span data-lang="tr">Yazar</span>
-              </h3>
-              <p class="agent-description">
-                <span data-lang="en">Constructs thesis-driven scripts with narrative arc. Each paragraph becomes a <span class="agent-highlight">visual scene</span>, written with cinematic language and emotional pacing. The Writer calculates word-per-minute timings to match your target duration perfectly.</span>
-                <span data-lang="tr">Anlatı yayı olan tez odaklı senaryolar oluşturur. Her paragraf bir <span class="agent-highlight">görsel sahneye</span> dönüşür, sinematik dil ve duygusal tempo ile yazılır. Yazar, hedef sürenize mükemmel şekilde uymak için kelime/dakika hesaplamaları yapar.</span>
-              </p>
-            </div>
-          </div>
+    <!-- 6. Gelir Modeli -->
+    <section>
+      <h2>6. Gelir Modeli</h2>
 
-          <!-- Agent 3: Art Director -->
-          <div class="agent-card">
-            <div class="agent-number">03</div>
-            <div class="agent-content">
-              <div class="agent-role">
-                <span data-lang="en">STYLE ARCHITECT</span>
-                <span data-lang="tr">STİL MİMARI</span>
-              </div>
-              <h3 class="agent-title">
-                <span data-lang="en">Art Director</span>
-                <span data-lang="tr">Sanat Yönetmeni</span>
-              </h3>
-              <p class="agent-description">
-                <span data-lang="en">Creates the <span class="agent-highlight">Style Bible</span>—a unified visual rulebook defining lighting, color palette, environment aesthetics, and motion philosophy. Every frame follows these rules, ensuring visual coherence across your entire production.</span>
-                <span data-lang="tr"><span class="agent-highlight">Stil İncil'i</span> oluşturur—ışıklandırma, renk paleti, çevre estetiği ve hareket felsefesini tanımlayan birleşik görsel kural kitabı. Her kare bu kuralları takip eder ve tüm üretiminizde görsel tutarlılık sağlar.</span>
-              </p>
-            </div>
-          </div>
+      <h4>Kanal 1: Mindplace SaaS — Recurring Revenue</h4>
+      <ul>
+        <li>Subscription bazlı (aylık/yıllık)</li>
+        <li>Self-serve onboarding, modül bazlı erişim</li>
+        <li>Film/animasyon odaklı modül seti</li>
+      </ul>
 
-          <!-- Agent 4: Director -->
-          <div class="agent-card">
-            <div class="agent-number">04</div>
-            <div class="agent-content">
-              <div class="agent-role">
-                <span data-lang="en">VISUAL DIRECTOR</span>
-                <span data-lang="tr">GÖRSEL YÖNETMENİ</span>
-              </div>
-              <h3 class="agent-title">
-                <span data-lang="en">Director</span>
-                <span data-lang="tr">Yönetmen</span>
-              </h3>
-              <p class="agent-description">
-                <span data-lang="en">Analyzes the script and generates a complete <span class="agent-highlight">Storyboard</span>. Plans camera angles (wide, close, aerial), subject blocking, and motion choreography for each 10-second segment. Ensures visual variety while maintaining emotional continuity.</span>
-                <span data-lang="tr">Senaryoyu analiz eder ve eksiksiz bir <span class="agent-highlight">Storyboard</span> oluşturur. Her 10 saniyelik segment için kamera açılarını (geniş, yakın, havadan), özne bloklama ve hareket koreografisini planlar. Duygusal sürekliliği korurken görsel çeşitlilik sağlar.</span>
-              </p>
-            </div>
-          </div>
+      <h4>Kanal 2: Mindplace B2B Custom Deployment — Project Revenue</h4>
+      <ul>
+        <li>Stüdyoya özel uygulama/site kurulumu</li>
+        <li>Ayrı bütçelendirme, proje bazlı</li>
+        <li>Modüllerin stüdyo ihtiyaçlarına göre özelleştirilmesi</li>
+      </ul>
 
-          <!-- Agent 5: Sound Engineer -->
-          <div class="agent-card">
-            <div class="agent-number">05</div>
-            <div class="agent-content">
-              <div class="agent-role">
-                <span data-lang="en">SONIC COMPOSER</span>
-                <span data-lang="tr">SES BESTECISI</span>
-              </div>
-              <h3 class="agent-title">
-                <span data-lang="en">Sound Engineer</span>
-                <span data-lang="tr">Ses Mühendisi</span>
-              </h3>
-              <p class="agent-description">
-                <span data-lang="en">The final layer. Generates <span class="agent-highlight">emotive voice-over</span> with precise word timing for seamless scene sync. Optionally composes <span class="agent-highlight">background music</span> matching the emotional journey—key, tempo, and instrumentation aligned with your narrative arc.</span>
-                <span data-lang="tr">Son katman. Kusursuz sahne senkronizasyonu için kesin kelime zamanlaması ile <span class="agent-highlight">duygusal sesli anlatım</span> oluşturur. İsteğe bağlı olarak duygusal yolculuğa uygun <span class="agent-highlight">arka plan müziği</span> besteleyebilir—tonalite, tempo ve enstrümantasyon anlatı yayınıza uyumludur.</span>
-              </p>
-            </div>
-          </div>
+      <h4>Kanal 3: Produckt İçerik — Content Revenue</h4>
+      <ul>
+        <li>Dijital dağıtım geliri (kendi kanallarımız)</li>
+        <li>TV/Platform lisans anlaşmaları</li>
+        <li>Yapımcılarla ücretli proje bazlı iş birlikleri</li>
+      </ul>
 
-        </div>
-      </section>
+      <h4>Kanal 0: Yatırım — Capital</h4>
+      <ul>
+        <li>Aktif yatırım turu devam ediyor</li>
+        <li>Hem Produckt orijinal serileri hem Mindplace geliştirmesi için capital arayışı</li>
+      </ul>
+    </section>
 
-         <!-- What VisualStoryteller Does -->
-      <section class="what-section fade-in">
-        <h2 class="what-title">
-          <span data-lang="en">What VisualStoryteller does for you</span>
-          <span data-lang="tr">VisualStoryteller sizin için neler yapar</span>
-        </h2>
-        <ul class="what-list">
-          <li class="what-item">
-            <div class="what-item-title">
-              <span data-lang="en">Conversational Brief Building</span>
-              <span data-lang="tr">Konuşarak Brief Oluşturma</span>
-            </div>
-            <p class="what-item-desc">
-              <span data-lang="en">Simply describe your vision in plain language. Our Creative Director agent asks intelligent questions to understand your subject, mood, style, and format preferences—no technical prompts required.</span>
-              <span data-lang="tr">Vizyonunuzu basit dille anlatın. Kreatif Direktör ajanımız özneyi, havayı, stili ve format tercihlerinizi anlamak için akıllı sorular sorar—teknik promptlara gerek yok.</span>
-            </p>
-          </li>
-          <li class="what-item">
-            <div class="what-item-title">
-              <span data-lang="en">Automated Multi-Agent Production</span>
-              <span data-lang="tr">Otomatik Çoklu-Ajan Üretimi</span>
-            </div>
-            <p class="what-item-desc">
-              <span data-lang="en">Five specialized AI agents work in sequence: Writer crafts narrative-driven scripts, Art Director defines visual language, Director plans shot composition, and Sound Engineer generates voice-over and music—all without manual intervention.</span>
-              <span data-lang="tr">Beş uzman yapay zeka ajanı sırayla çalışır: Yazar anlatı odaklı senaryolar hazırlar, Sanat Yönetmeni görsel dili tanımlar, Yönetmen plan kompozisyonu oluşturur ve Ses Mühendisi sesli anlatım ve müzik üretir—manuel müdahale olmadan.</span>
-            </p>
-          </li>
-          <li class="what-item">
-            <div class="what-item-title">
-              <span data-lang="en">Real-Time Visual Control</span>
-              <span data-lang="tr">Gerçek Zamanlı Görsel Kontrol</span>
-            </div>
-            <p class="what-item-desc">
-              <span data-lang="en">Refine any keyframe with natural language edits, regenerate scenes you don't like, apply artistic style transfers (Studio Ghibli, Pixar, Oil Painting, etc.), or adjust motion prompts—iterate until perfect.</span>
-              <span data-lang="tr">Herhangi bir anahtar kareyi doğal dil düzenlemeleriyle iyileştirin, beğenmediğiniz sahneleri yeniden oluşturun, sanatsal stil transferleri uygulayın (Studio Ghibli, Pixar, Yağlı Boya vb.), veya hareket promptlarını ayarlayın—mükemmel olana kadar tekrarlayın.</span>
-            </p>
-          </li>
-          <li class="what-item">
-            <div class="what-item-title">
-              <span data-lang="en">Full Project Export</span>
-              <span data-lang="tr">Tam Proje Dışa Aktarımı</span>
-            </div>
-            <p class="what-item-desc">
-              <span data-lang="en">Export everything: individual video segments, keyframe stills, narrator voice-over, background music, and a complete project manifest—ready for final editing in professional tools or direct sharing.</span>
-              <span data-lang="tr">Her şeyi dışa aktarın: tekil video segmentleri, anahtar kare görselleri, anlatıcı sesi, arka plan müziği ve eksiksiz proje manifestosu—profesyonel araçlarda son düzenleme veya doğrudan paylaşım için hazır.</span>
-            </p>
-          </li>
-        </ul>
-      </section>
+    <!-- 7. Hedef Pazar -->
+    <section>
+      <h2>7. Hedef Pazar ve Müşteri Profili</h2>
 
-      <!-- Fluent Collaboration Simulation Section -->
-      <section class="collaboration-sim-section fade-in">
-        <div class="section-header">
-          <h2 class="section-title">
-            <span data-lang="en">Fluent Collaboration</span>
-            <span data-lang="tr">Akıcı İşbirliği</span>
-          </h2>
-          <p class="section-subtitle">
-            <span data-lang="en">You talk naturally. The agents build the technical brief in real-time.</span>
-            <span data-lang="tr">Doğal konuşursunuz. Ajanlar teknik brief'i gerçek zamanlı oluşturur.</span>
-          </p>
-        </div>
+      <h3>Birincil Segment: Film ve Animasyon Üreticileri</h3>
 
-        <div class="collab-sim-grid">
-          <!-- Left: Chat Stream -->
-          <div class="collab-chat-stream" id="collabChatStream">
-            <!-- Messages will be dynamically inserted via JavaScript -->
-          </div>
+      <h4>Kim?</h4>
+      <ul>
+        <li>Bağımsız film yapımcıları ve küçük prodüksiyon stüdyoları (SaaS)</li>
+        <li>Orta-büyük animasyon/VFX stüdyoları (B2B Custom Deployment)</li>
+        <li>İçerik üreticileri ve yeni nesil dijital yapımcılar</li>
+      </ul>
 
-          <!-- Right: Live Context Card -->
-          <div class="collab-context-card">
-            <div class="collab-context-label">
-              <span data-lang="en">Live Project Context</span>
-              <span data-lang="tr">Canlı Proje Bağlamı</span>
-            </div>
-            <div class="collab-topic-display collab-topic-empty" id="collabTopic">
-              <span data-lang="en">Untitled Project</span>
-              <span data-lang="tr">İsimsiz Proje</span>
-            </div>
-            <div class="collab-angle-display" id="collabAngle">
-              <span data-lang="en">Waiting for concept...</span>
-              <span data-lang="tr">Konsept bekleniyor...</span>
-            </div>
+      <h4>Acısı Ne?</h4>
+      <ul>
+        <li>Pre-production süreci pahalı ve yavaş (storyboard çizdirmek, concept art, sahne tasarımı)</li>
+        <li>Prompt engineering bilgisi gerektiren AI araçları kullanmak zor</li>
+        <li>Mevcut AI araçları genel amaçlı — film/animasyon diline konuşmuyor</li>
+      </ul>
 
-            <div class="collab-params-list">
-              <div class="collab-param-row" id="collabRowVisual">
-                <span class="collab-param-label">
-                  <span data-lang="en">Visual Style</span>
-                  <span data-lang="tr">Görsel Stil</span>
-                </span>
-                <span class="collab-param-value">
-                  <span data-lang="en">Pending...</span>
-                  <span data-lang="tr">Bekleniyor...</span>
-                </span>
-              </div>
+      <h4>Çözümümüz</h4>
+      <ul>
+        <li>Sinematik dilde konuşan, film üretim terminolojisini bilen AI modülleri</li>
+        <li>Teknik bilgi gerektirmeden profesyonel çıktı (kamera açıları, lens seçimi, yönetmen stili, aydınlatma)</li>
+        <li>Kategori bazında derin modüller: scripting, storyboarding, scene design, character consistency</li>
+      </ul>
+    </section>
 
-              <div class="collab-param-row" id="collabRowArtKey">
-                <span class="collab-param-label">
-                  <span data-lang="en">Art Keyword</span>
-                  <span data-lang="tr">Sanat Anahtar Kelimesi</span>
-                </span>
-                <span class="collab-param-value">
-                  <span data-lang="en">Pending...</span>
-                  <span data-lang="tr">Bekleniyor...</span>
-                </span>
-              </div>
+    <!-- 8. Rekabet Avantajı -->
+    <section>
+      <h2>8. Rekabet Avantajı</h2>
 
-              <div class="collab-param-row" id="collabRowAtmos">
-                <span class="collab-param-label">
-                  <span data-lang="en">Atmosphere</span>
-                  <span data-lang="tr">Atmosfer</span>
-                </span>
-                <span class="collab-param-value">
-                  <span data-lang="en">Pending...</span>
-                  <span data-lang="tr">Bekleniyor...</span>
-                </span>
-              </div>
+      <h3>1. Sektör Odağı</h3>
+      <p>Genel amaçlı AI araçları (Midjourney, Runway, Pika) herkese hitap etmeye çalışıyor. Biz sadece film ve animasyon endüstrisinin diline, iş akışlarına ve ihtiyaçlarına odaklanıyoruz.</p>
 
-              <div class="collab-param-row" id="collabRowSpecs">
-                <span class="collab-param-label">
-                  <span data-lang="en">Format</span>
-                  <span data-lang="tr">Format</span>
-                </span>
-                <span class="collab-param-value">
-                  <span data-lang="en">Pending...</span>
-                  <span data-lang="tr">Bekleniyor...</span>
-                </span>
-              </div>
-            </div>
+      <h3>2. Araç + İçerik Döngüsü</h3>
+      <p>Hiçbir rakip hem aracı geliştirip hem o araçla profesyonel içerik üretmiyor. Bu döngü, ürün kalitesini sürekli artıran benzersiz bir feedback mekanizması.</p>
 
-            <div class="collab-json-status">
-              <span class="collab-status-dot"></span>
-              <span data-lang="en">JSON Ready:</span>
-              <span data-lang="tr">JSON Hazır:</span>
-              <span id="collabJsonStatus">False</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <h3>3. Kanıtlanmış Teknoloji</h3>
+      <p>PoC sürecinde 6 aktif modül, agentic pipeline'lar, multi-model orchestration ve 3D viewer'lar çalışır halde geliştirildi. Teknoloji sıfırdan başlamıyor — kanıtlanmış bir altyapı üzerine inşa ediliyor.</p>
 
-    <!-- Limitations Section -->
-      <section class="limitations-section fade-in">
-        <div class="section-header">
-          <h2 class="section-title">
-            <span data-lang="en">Platform DNA</span>
-            <span data-lang="tr">Platform DNA'sı</span>
-          </h2>
-          <p class="section-subtitle">
-            <span data-lang="en">Understanding the strengths of the generative engine.</span>
-            <span data-lang="tr">Üretici motorun güçlü yönlerini anlamak.</span>
-          </p>
-        </div>
+      <h3>4. Domain Expertise</h3>
+      <p>Ekipte hem AI/software mühendisliği hem film üretim deneyimi bir arada. Bu kombinasyon, "teknik olarak mümkün ama üretimde işe yaramaz" tuzağını önlüyor.</p>
+    </section>
 
-        <div class="limitations-grid">
-          <!-- Left: Ideal For -->
-          <div class="limitation-card limitation-card-positive">
-            <div class="limitation-card-header">
-              <span class="limitation-status-dot limitation-status-green"></span>
-              <h4 class="limitation-card-title">
-                <span data-lang="en">Ideal For</span>
-                <span data-lang="tr">İdeal Kullanım</span>
-              </h4>
-            </div>
-            <ul class="limitation-check-list">
-              <li>
-                <span data-lang="en">Cinematic Clips</span>
-                <span data-lang="tr">Sinematik Klipler</span>
-              </li>
-              <li>
-                <span data-lang="en">Historical & Nature Documentaries</span>
-                <span data-lang="tr">Tarihsel & Doğa Belgeselleri</span>
-              </li>
-              <li>
-                <span data-lang="en">Abstract Concept Visualization</span>
-                <span data-lang="tr">Soyut Kavram Görselleştirme</span>
-              </li>
-              <li>
-                <span data-lang="en">Cartoon or Animated Storytelling</span>
-                <span data-lang="tr">Çizgi Film veya Animasyon Hikayesi</span>
-              </li>
-              <li>
-                <span data-lang="en">Educational and Explainer Videos</span>
-                <span data-lang="tr">Eğitici ve Açıklayıcı Videolar</span>
-              </li>
-            </ul>
-          </div>
+    <!-- 9. PoC'dan Taşınan Değer -->
+    <section>
+      <h2>9. PoC'dan Taşınan Değer</h2>
+      <p>Devre dışı bırakılan ürünler çöpe gitmiyor. PoC'un en değerli kazanımları yeni sisteme taşınıyor:</p>
 
-          <!-- Right: Current Limitations -->
-          <div class="limitation-card limitation-card-negative">
-            <div class="limitation-card-header">
-              <span class="limitation-status-dot limitation-status-orange"></span>
-              <h4 class="limitation-card-title">
-                <span data-lang="en">Current Limitations</span>
-                <span data-lang="tr">Mevcut Kısıtlamalar</span>
-              </h4>
-            </div>
-            <p class="limitation-card-desc">
-              <span data-lang="en">The generative nature of the model creates a new visual context for every scene.</span>
-              <span data-lang="tr">Modelin üretken doğası her sahne için yeni bir görsel bağlam oluşturur.</span>
-            </p>
-            <ul class="limitation-cross-list">
-              <li>
-                <strong>
-                  <span data-lang="en">No Character Consistency:</span>
-                  <span data-lang="tr">Karakter Tutarlılığı Yok:</span>
-                </strong>
-                <span data-lang="en">Faces will vary between shots.</span>
-                <span data-lang="tr">Yüzler sahneler arasında değişecektir.</span>
-              </li>
-              <li>
-                <strong>
-                  <span data-lang="en">No Lip-Sync Dialogue:</span>
-                  <span data-lang="tr">Dudak Senkronizasyonu Yok:</span>
-                </strong>
-                <span data-lang="en">Designed for narration, not conversation.</span>
-                <span data-lang="tr">Konuşma için değil, anlatım için tasarlanmıştır.</span>
-              </li>
-              <li>
-                <strong>
-                  <span data-lang="en">Text Rendering:</span>
-                  <span data-lang="tr">Metin Oluşturma:</span>
-                </strong>
-                <span data-lang="en">On-screen text may not be legible.</span>
-                <span data-lang="tr">Ekrandaki metin okunaklı olmayabilir.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>PoC Kazanımı</th><th>Yeni Sistemdeki Rolü</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>XPlace modülleri</strong> (6 aktif)</td><td>Zenginleştirilip yeni Mindplace modülleri olacak</td></tr>
+            <tr><td><strong>Agentic pipeline</strong> mimarisi (VST)</td><td>Workflow engine'in temeli</td></tr>
+            <tr><td><strong>AI-Think engine</strong> (Asset Studio)</td><td>Akıllı prompt zenginleştirme altyapısı</td></tr>
+            <tr><td><strong>Provider registry</strong> (9 AI model)</td><td>Unified model routing</td></tr>
+            <tr><td><strong>Uzman ajanlar</strong> (photographer, director, composer)</td><td>Domain-specific agent pool</td></tr>
+            <tr><td><strong>Auth/access/credit</strong> sistemi</td><td>Erişim ve monetizasyon altyapısı</td></tr>
+            <tr><td><strong>3D viewer'lar</strong> (Three.js)</td><td>Panorama ve sahne modüllerinde devam</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-      <!-- Capabilities Section -->
-      <section class="capabilities-section fade-in">
-        <div class="section-header">
-          <h2 class="section-title">
-            <span data-lang="en">What Can You Generate?</span>
-            <span data-lang="tr">Gelişmiş Yetenekler</span>
-          </h2>
-          <p class="section-subtitle">
-            <span data-lang="en">Professional-grade features built into the platform.</span>
-            <span data-lang="tr">Platforma entegre profesyonel seviye özellikler.</span>
-          </p>
-        </div>
+    <!-- 10. Yol Haritası -->
+    <section>
+      <h2>10. Yol Haritası</h2>
 
-        <div class="capabilities-grid">
-          <div class="capability-card">
-            <div class="capability-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="12" cy="12" r="3"/>
-                <path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m-2 2l-4.2 4.2m13.2-5.2h-6m-6 0H1m13.2 5.2l-4.2-4.2m-2-2l-4.2-4.2"/>
-              </svg>
-            </div>
-            <h3 class="capability-title">
-              <span data-lang="en">Style Transfer Engine</span>
-              <span data-lang="tr">Stil Transfer Motoru</span>
-            </h3>
-            <p class="capability-description">
-              <span data-lang="en">Transform any scene into Studio Ghibli, Pixar, Oil Painting, Film Noir, or Low Poly aesthetics with a single click.</span>
-              <span data-lang="tr">Herhangi bir sahneyi tek tıklamayla Studio Ghibli, Pixar, Yağlı Boya, Film Noir veya Low Poly estetiğine dönüştürün.</span>
-            </p>
-          </div>
-
-          <div class="capability-card">
-            <div class="capability-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
-                <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
-              </svg>
-            </div>
-            <h3 class="capability-title">
-              <span data-lang="en">Natural Language Refinement</span>
-              <span data-lang="tr">Doğal Dil İyileştirme</span>
-            </h3>
-            <p class="capability-description">
-              <span data-lang="en">Edit any image or motion prompt with plain language. "Add more dramatic lighting" or "Make the camera move slower" instantly regenerates.</span>
-              <span data-lang="tr">Herhangi bir görsel veya hareket promptunu düz dille düzenleyin. "Daha dramatik ışıklandırma ekle" veya "Kamera daha yavaş hareket etsin" anında yeniden oluşturur.</span>
-            </p>
-          </div>
-
-          <div class="capability-card">
-            <div class="capability-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="2" y="7" width="20" height="15" rx="2"/>
-                <polyline points="17 2 12 7 7 2"/>
-              </svg>
-            </div>
-            <h3 class="capability-title">
-              <span data-lang="en">Multi-Format Support</span>
-              <span data-lang="tr">Çoklu Format Desteği</span>
-            </h3>
-            <p class="capability-description">
-              <span data-lang="en">Native 16:9 landscape or 9:16 vertical composition. Optimized for YouTube, TikTok, or presentation contexts.</span>
-              <span data-lang="tr">Yerel 16:9 yatay veya 9:16 dikey kompozisyon. YouTube, TikTok veya sunum bağlamları için optimize edilmiş.</span>
-            </p>
-          </div>
-
-          <div class="capability-card">
-            <div class="capability-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M9 18V5l12-2v13"/>
-                <circle cx="6" cy="18" r="3"/>
-                <circle cx="18" cy="16" r="3"/>
-              </svg>
-            </div>
-            <h3 class="capability-title">
-              <span data-lang="en">Context-Aware Audio</span>
-              <span data-lang="tr">Bağlam Farkında Ses</span>
-            </h3>
-            <p class="capability-description">
-              <span data-lang="en">Voice tone adapts to mood (energetic, measured, intimate, dramatic). Background music generated to match emotional arc.</span>
-              <span data-lang="tr">Ses tonu havaya uyum sağlar (enerjik, ölçülü, samimi, dramatik). Arka plan müziği duygusal yayı eşleşecek şekilde üretilir.</span>
-            </p>
-          </div>
-        </div>
-      </section>
-
-        <!-- Production Capabilities Grid Section -->
-      <section class="production-grid-section fade-in">
-        <div class="section-header">
-          <h2 class="section-title">
-            <span data-lang="en">Production Capabilities</span>
-            <span data-lang="tr">Üretim Yetenekleri</span>
-          </h2>
-          <p class="section-subtitle">
-            <span data-lang="en">A complete studio team in your browser.</span>
-            <span data-lang="tr">Tarayıcınızda tam bir stüdyo ekibi.</span>
-          </p>
-        </div>
-
-        <div class="production-bento-grid">
-          <div class="production-card production-card-large">
-            <div class="production-card-content">
-              <div class="production-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
-                  <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                </svg>
-              </div>
-              <h3 class="production-card-title">
-                <span data-lang="en">Thesis-Driven Scripting</span>
-                <span data-lang="tr">Tez Odaklı Senaryo</span>
-              </h3>
-              <p class="production-card-desc">
-                <span data-lang="en">Unlike generic chat, our Writer Agent drafts scripts with a narrative arc, defending a specific angle tailored to the chosen atmosphere.</span>
-                <span data-lang="tr">Genel sohbetten farklı olarak, Yazar Ajanımız seçilen atmosfere göre özel bir bakış açısını savunan, anlatı akışına sahip senaryolar hazırlar.</span>
-              </p>
-            </div>
-            <div class="production-card-visual production-visual-script">
-              <div class="production-code-snippet">
-                <span class="production-code-line production-code-dim">// Generating Narrative Arc...</span>
-                <span class="production-code-line production-code-highlight">Thesis: "Nature's resilience in urban decay"</span>
-                <span class="production-code-line">Tone: Melancholic but hopeful</span>
-                <span class="production-code-line">Act 1: The silence of concrete...</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="production-card production-card-tall">
-            <div class="production-card-content">
-              <div class="production-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/>
-                  <path d="M19 10v2a7 7 0 01-14 0v-2"/>
-                  <line x1="12" y1="19" x2="12" y2="23"/>
-                  <line x1="8" y1="23" x2="16" y2="23"/>
-                </svg>
-              </div>
-              <h3 class="production-card-title">
-                <span data-lang="en">Sonic Intelligence</span>
-                <span data-lang="tr">Ses Zekası</span>
-              </h3>
-              <p class="production-card-desc">
-                <span data-lang="en">Context-aware music generation and emotive voiceovers.</span>
-                <span data-lang="tr">Bağlama duyarlı müzik üretimi ve duygusal sesli anlatım.</span>
-              </p>
-            </div>
-            <div class="production-card-visual production-visual-audio">
-              <div class="production-audio-wave">
-                <span></span><span></span><span></span><span></span><span></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="production-card">
-            <div class="production-card-content">
-              <div class="production-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/>
-                  <circle cx="8.5" cy="8.5" r="1.5"/>
-                  <polyline points="21 15 16 10 5 21"/>
-                </svg>
-              </div>
-              <h3 class="production-card-title">
-                <span data-lang="en">Latest New Models</span>
-                <span data-lang="tr">En Yeni Modeller</span>
-              </h3>
-              <p class="production-card-desc">
-                <span data-lang="en">High-fidelity keyframes turned into 10s motion clips. Kling, Veo, Wan and more..</span>
-                <span data-lang="tr">Yüksek çözünürlüklü anahtar kareler 10 saniyelik hareket kliplere dönüştürülür. Kling, Veo, Wan ve daha fazlası..</span>
-              </p>
-            </div>
-          </div>
-
-          <div class="production-card">
-            <div class="production-card-content">
-              <div class="production-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-                  <line x1="9" y1="9" x2="9.01" y2="9"/>
-                  <line x1="15" y1="9" x2="15.01" y2="9"/>
-                </svg>
-              </div>
-              <h3 class="production-card-title">
-                <span data-lang="en">Multi-Style Support</span>
-                <span data-lang="tr">Çoklu Stil Desteği</span>
-              </h3>
-              <p class="production-card-desc">
-                <span data-lang="en">From 8k Photorealism to Studio Ghibli aesthetics.</span>
-                <span data-lang="tr">8k Fotorealizm'den Studio Ghibli estetiğine kadar.</span>
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-       <!-- Visual Prompting Guide Section -->
-      <section class="prompt-guide-section fade-in">
-        <div class="section-header">
-          <h2 class="section-title">
-            <span data-lang="en">Visual Prompting Guide</span>
-            <span data-lang="tr">Görsel Prompt Rehberi</span>
-          </h2>
-          <p class="section-subtitle">
-            <span data-lang="en">Hover over the keywords to understand the prompt structure.</span>
-            <span data-lang="tr">Prompt yapısını anlamak için anahtar kelimelerin üzerine gelin.</span>
-          </p>
-        </div>
-
-        <div class="prompt-demo-box">
-          <div class="prompt-demo-text">
-            <span class="interactive-keyword"
-                 data-label="Camera & Motion"
-                 data-title="Cinematography"
-                 data-desc="Defines the lens choice and camera movement. 'Low-angle' makes the subject look powerful; 'tracking' implies dynamic speed.">
-                 A low-angle tracking shot</span>
-            follows a
-            <span class="interactive-keyword"
-                 data-label="Core Concept"
-                 data-title="Subject & Action"
-                 data-desc="The focus of the scene. We define not just the noun (Cheetah), but the active verb (Sprinting) to trigger the video model's motion engine.">
-                 cheetah sprinting across the golden savanna</span>,
-            kicking up dust in the
-            <span class="interactive-keyword"
-                 data-label="Art Direction"
-                 data-title="Lighting & Color Palette"
-                 data-desc="The Art Director agent sets this to 'Warm sunset' to ensure visual continuity with previous scenes in the timeline.">
-                 warm, hazy sunset light</span>,
-            filmed in
-            <span class="interactive-keyword"
-                 data-label="Visual Fidelity"
-                 data-title="Style Keyword"
-                 data-desc="Instructs the model on the texture. Ensures the output looks like a high-budget BBC production, not a cartoon.">
-                 8k wildlife documentary style</span>.
-            The scene captures the
-            <span class="interactive-keyword"
-                 data-label="Atmosphere"
-                 data-title="Emotional Tone"
-                 data-desc="Guides the pacing and the music generator. 'Tense' implies faster cuts and rhythmic percussion in the soundtrack.">
-                 tense, adrenaline-fueled atmosphere</span>
-            of the hunt.
-          </div>
-
-          <div class="prompt-demo-footer">
-            <div class="demo-left">
-              <div class="demo-btn-circle">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              </div>
-              <div class="demo-btn-pill">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                <span data-lang="en">Video</span>
-                <span data-lang="tr">Video</span>
-              </div>
-            </div>
-            <button class="demo-btn-send">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            </button>
-          </div>
-        </div>
-
-        <div class="keyword-reveal-container" id="keywordRevealArea">
-          <span class="keyword-reveal-label" id="keywordRevealLabel">Label</span>
-          <div class="keyword-reveal-title" id="keywordRevealTitle">Title</div>
-          <p class="keyword-reveal-desc" id="keywordRevealDesc">Description</p>
-        </div>
-      </section>
-
-      <!-- Style Reference Table Section -->
-      <section class="style-reference-section fade-in">
-        <div class="section-header">
-          <h2 class="section-title">
-            <span data-lang="en">Style Reference Guide</span>
-            <span data-lang="tr">Stil Referans Rehberi</span>
-          </h2>
-          <p class="section-subtitle">
-            <span data-lang="en">Force specific rendering styles by using these keywords in your prompts.</span>
-            <span data-lang="tr">Promptlarınızda bu anahtar kelimeleri kullanarak belirli render stillerini zorlayın.</span>
-          </p>
-        </div>
-
-        <div class="style-reference-table">
-          <div class="style-ref-row style-ref-header">
-            <div class="style-ref-cell">
-              <span data-lang="en">Style Name</span>
-              <span data-lang="tr">Stil Adı</span>
-            </div>
-            <div class="style-ref-cell">
-              <span data-lang="en">Best For</span>
-              <span data-lang="tr">En İyi Kullanım</span>
-            </div>
-            <div class="style-ref-cell">
-              <span data-lang="en">Prompt Trigger</span>
-              <span data-lang="tr">Prompt Tetikleyicisi</span>
-            </div>
-          </div>
-
-          <div class="style-ref-row">
-            <div class="style-ref-cell"><strong>Oil Painting</strong></div>
-            <div class="style-ref-cell">
-              <span data-lang="en">Historical, Emotional</span>
-              <span data-lang="tr">Tarihsel, Duygusal</span>
-            </div>
-            <div class="style-ref-cell code-text">"Classical oil painting, brush strokes, impasto texture"</div>
-          </div>
-
-          <div class="style-ref-row">
-            <div class="style-ref-cell"><strong>Disney</strong></div>
-            <div class="style-ref-cell">
-              <span data-lang="en">Fantasy, Family</span>
-              <span data-lang="tr">Fantezi, Aile</span>
-            </div>
-            <div class="style-ref-cell code-text">"Disney animation style, expressive, magical atmosphere"</div>
-          </div>
-
-          <div class="style-ref-row">
-            <div class="style-ref-cell"><strong>Pixar</strong></div>
-            <div class="style-ref-cell">
-              <span data-lang="en">Character-driven, Modern</span>
-              <span data-lang="tr">Karakter Odaklı, Modern</span>
-            </div>
-            <div class="style-ref-cell code-text">"Pixar 3D style, subsurface scattering, cinematic"</div>
-          </div>
-
-          <div class="style-ref-row">
-            <div class="style-ref-cell"><strong>Low Poly</strong></div>
-            <div class="style-ref-cell">
-              <span data-lang="en">Tech, Abstract, Modern</span>
-              <span data-lang="tr">Teknoloji, Soyut, Modern</span>
-            </div>
-            <div class="style-ref-cell code-text">"Low poly 3D, geometric, flat shading, minimal"</div>
-          </div>
-        </div>
-      </section>
-
-      
-
-      <!-- Visual Fidelity Matrix Section -->
-      <section class="visual-fidelity-section fade-in">
-        <div class="section-header">
-          <h2 class="section-title">
-            <span data-lang="en">Visual Fidelity Matrix</span>
-            <span data-lang="tr">Görsel Doğruluk Matrisi</span>
-          </h2>
-          <p class="section-subtitle">
-            <span data-lang="en">How the same semantic prompt is interpreted across distinct style presets.</span>
-            <span data-lang="tr">Aynı anlamsal prompt'un farklı stil ön ayarlarında nasıl yorumlandığı.</span>
-          </p>
-        </div>
-
-        <!-- Original Reference -->
-        <div class="fidelity-original-showcase">
-          <div class="fidelity-image-container">
-            <img src="/assets/original.jpg" alt="Original Reference Image">
-          </div>
-          <div class="fidelity-prompt-bar">
-            <div class="fidelity-prompt-label">
-              <span data-lang="en">Source Prompt</span>
-              <span data-lang="tr">Kaynak Prompt</span>
-            </div>
-            <div class="fidelity-prompt-text">
-              <span data-lang="en">"An astronaut standing alone on a dusty martian ridge, looking at a distant blue earth, cinematic lighting"</span>
-              <span data-lang="tr">"Tozlu Mars sırtında tek başına duran bir astronot, uzaktaki mavi dünyaya bakıyor, sinematik aydınlatma"</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Style Variations -->
-        <div class="fidelity-variations-title">
-          <span data-lang="en">Style Variations</span>
-          <span data-lang="tr">Stil Varyasyonları</span>
-        </div>
-
-        <div class="fidelity-style-grid">
-          <div class="fidelity-style-card">
-            <div class="fidelity-style-image-container">
-              <img src="/assets/oilpainting.jpg" alt="Oil Painting Style">
-              <div class="fidelity-style-badge">Oil Painting</div>
-            </div>
-            <div class="fidelity-style-info">
-              <h4>
-                <span data-lang="en">Classical Oil Painting</span>
-                <span data-lang="tr">Klasik Yağlı Boya</span>
-              </h4>
-              <p>
-                <span data-lang="en">Simulates brush strokes, impasto texture, and classical composition rules with rich, warm color palettes.</span>
-                <span data-lang="tr">Fırça darbeleri, impasto doku ve zengin, sıcak renk paletleriyle klasik kompozisyon kurallarını simüle eder.</span>
-              </p>
-            </div>
-          </div>
-
-          <div class="fidelity-style-card">
-            <div class="fidelity-style-image-container">
-              <img src="/assets/disney.jpg" alt="Disney Style">
-              <div class="fidelity-style-badge">Disney Style</div>
-            </div>
-            <div class="fidelity-style-info">
-              <h4>
-                <span data-lang="en">Disney Animation</span>
-                <span data-lang="tr">Disney Animasyonu</span>
-              </h4>
-              <p>
-                <span data-lang="en">Stylized proportions, expressive features, soft lighting with magical atmosphere and vibrant colors.</span>
-                <span data-lang="tr">Stilize oranlar, etkileyici özellikler, büyülü atmosfer ve canlı renklerle yumuşak aydınlatma.</span>
-              </p>
-            </div>
-          </div>
-
-          <div class="fidelity-style-card">
-            <div class="fidelity-style-image-container">
-              <img src="/assets/pixar.jpg" alt="Pixar Style">
-              <div class="fidelity-style-badge">Pixar Style</div>
-            </div>
-            <div class="fidelity-style-info">
-              <h4>
-                <span data-lang="en">Pixar 3D Animation</span>
-                <span data-lang="tr">Pixar 3D Animasyon</span>
-              </h4>
-              <p>
-                <span data-lang="en">Subsurface scattering, detailed textures, cinematic lighting with emotionally expressive characters.</span>
-                <span data-lang="tr">Alt yüzey saçılımı, detaylı dokular, duygusal olarak etkileyici karakterlerle sinematik aydınlatma.</span>
-              </p>
-            </div>
-          </div>
-
-          <div class="fidelity-style-card">
-            <div class="fidelity-style-image-container">
-              <img src="/assets/lowpoly.jpg" alt="Low Poly Style">
-              <div class="fidelity-style-badge">Low Poly</div>
-            </div>
-            <div class="fidelity-style-info">
-              <h4>
-                <span data-lang="en">Low Poly 3D</span>
-                <span data-lang="tr">Düşük Poligon 3D</span>
-              </h4>
-              <p>
-                <span data-lang="en">Geometric simplification, flat shading, minimal color palettes with modern aesthetic appeal.</span>
-                <span data-lang="tr">Geometrik sadeleştirme, düz gölgeleme, modern estetik çekiciliğe sahip minimal renk paletleri.</span>
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-        
- 
-
-       <!-- Motion Formula Section -->
-      <section class="motion-formula-section fade-in">
-        <div class="section-header">
-          <h2 class="section-title">
-            <span data-lang="en">The Perfect Motion Prompt</span>
-            <span data-lang="tr">Mükemmel Hareket Promptu</span>
-          </h2>
-          <p class="section-subtitle">
-            <span data-lang="en">When refining scenes in the Studio, use this formula for best results.</span>
-            <span data-lang="tr">Stüdyoda sahneleri iyileştirirken en iyi sonuçlar için bu formülü kullanın.</span>
-          </p>
-        </div>
-
-        <div class="formula-display">
-          <span data-lang="en">[Camera Move] + [Subject Action] + [Environmental Effect]</span>
-          <span data-lang="tr">[Kamera Hareketi] + [Özne Aksiyonu] + [Çevresel Etki]</span>
-        </div>
-
-        <div class="formula-example">
-          <h4 class="example-title">
-            <span data-lang="en">Example:</span>
-            <span data-lang="tr">Örnek:</span>
-          </h4>
-          <div class="example-code">
-            <span data-lang-block="en">"Slow drone push forward (Camera) over the ancient ruins, while birds fly across the frame (Subject) and dust particles float in the sunlight (Environment)."</span>
-            <span data-lang-block="tr">"Yavaş drone itişi (Kamera) antik harabelerin üzerinden, kuşlar çerçeveyi geçerken (Özne) ve toz parçacıkları güneş ışığında süzülürken (Çevre)."</span>
-          </div>
-        </div>
-      </section>
-
-
-      <!-- Motion Dynamics Section -->
-      <section class="motion-dynamics-section fade-in">
-        <div class="section-header">
-          <h2 class="section-title">
-            <span data-lang="en">Motion Dynamics</span>
-            <span data-lang="tr">Hareket Dinamikleri</span>
-          </h2>
-          <p class="section-subtitle">
-            <span data-lang="en">Static imagery kills immersion. Use specific motion syntax to bring scenes to life.</span>
-            <span data-lang="tr">Statik görüntüler sürükleyiciliği öldürür. Sahneleri canlandırmak için belirli hareket sözdizimini kullanın.</span>
-          </p>
-        </div>
-
-        <div class="motion-syntax-box">
-          <h3 class="motion-syntax-title">
-            <span data-lang="en">The Motion Syntax</span>
-            <span data-lang="tr">Hareket Sözdizimi</span>
-          </h3>
-          <p class="motion-syntax-desc">
-            <span data-lang="en">To achieve cinematic results, define three vectors of movement:</span>
-            <span data-lang="tr">Sinematik sonuçlar elde etmek için üç hareket vektörü tanımlayın:</span>
-          </p>
-          <ul class="motion-vector-list">
-            <li>
-              <strong>
-                <span data-lang="en">Camera Vector:</span>
-                <span data-lang="tr">Kamera Vektörü:</span>
-              </strong>
-              <code>Drone Push, Orbit, Pan Right, Tilt Up</code>
-            </li>
-            <li>
-              <strong>
-                <span data-lang="en">Subject Vector:</span>
-                <span data-lang="tr">Özne Vektörü:</span>
-              </strong>
-              <code>Walking forward, turning head, hand gestures</code>
-            </li>
-            <li>
-              <strong>
-                <span data-lang="en">Atmosphere Vector:</span>
-                <span data-lang="tr">Atmosfer Vektörü:</span>
-              </strong>
-              <code>Wind blowing hair, dust particles, rain falling</code>
-            </li>
+      <div class="roadmap">
+        <div class="roadmap-phase">
+          <h4>Faz 1 — Temel (Foundation)</h4>
+          <ul>
+            <li>Yeni Mindplace modül mimarisini kur (PoC'dan revize)</li>
+            <li>İlk modül setini production-ready hale getir (scripting, storyboarding, scene design)</li>
+            <li>SaaS erişim ve onboarding akışı</li>
+            <li>Produckt ilk seri pre-production'a başla</li>
           </ul>
         </div>
-      </section>
+        <div class="roadmap-phase">
+          <h4>Faz 2 — Büyüme (Growth)</h4>
+          <ul>
+            <li>B2B Custom Deployment ilk pilot stüdyo</li>
+            <li>Produckt ilk serinin yayını + showcase</li>
+            <li>Modül sayısını artır (karakter, animasyon odaklı yeni modüller)</li>
+            <li>Gelir modelini doğrula</li>
+          </ul>
+        </div>
+        <div class="roadmap-phase">
+          <h4>Faz 3 — Ölçeklenme (Scale)</h4>
+          <ul>
+            <li>SaaS kullanıcı tabanını büyüt</li>
+            <li>Produckt içerik kataloğunu genişlet (5 mini seri hedefi)</li>
+            <li>Platform lisans anlaşmaları</li>
+            <li>B2B deployment portföyünü genişlet</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-   
+    <!-- 11. Temel Mesaj -->
+    <section>
+      <h2>11. Temel Mesaj</h2>
 
-      <!-- CTA Section -->
-      <section class="cta-section fade-in">
-        <h2 class="cta-title">
-          <span data-lang="en">Ready to Tell Your Story?</span>
-          <span data-lang="tr">Hikayenizi Anlatmaya Hazır mısınız?</span>
-        </h2>
-        <p class="cta-subtitle">
-          <span data-lang="en">Describe your vision, and let our AI agents handle the production.</span>
-          <span data-lang="tr">Vizyonunuzu tanımlayın, yapay zeka ajanlarımız üretimi yönetsin.</span>
-        </p>
-        <button class="hero-cta" onclick="window.location.href='#'">
-          <span data-lang="en">Get Early Access</span>
-          <span data-lang="tr">Erken Erişim İste</span>
-          
-        </button>
-      </section>
-
-    </div>
-
-    <div class="image-panel" id="imagePanel">
-      <img src="assets/landingpage-firstframe.png" alt="Mindplace Visual Storytelling" id="heroImage" class="panel-image">
-
-      <video id="heroVideo" class="panel-video" muted playsinline preload="auto">
-        <source src="assets/1224.mp4" type="video/mp4">
-      </video>
-
-      <div class="floating-logo" id="floatingLogo">
-        <div class="logo-line logo-line-top">Mindplace</div>
-        <div class="logo-line logo-line-main">VisualStoryteller</div>
-        <div class="logo-line logo-line-bottom">by LumosAI</div>
+      <div class="highlight">
+        <p>Lumos Generative AI, film ve animasyon endüstrisini yapay zeka ile dönüştürmek için kuruldu.</p>
       </div>
 
-      <!-- Blur Transition Overlay -->
-      <div class="blur-transition-overlay" id="blurOverlay"></div>
-    </div>
+      <p>İki kolu var: <strong>Mindplace</strong> yapımcılara en güçlü AI üretim araçlarını sunuyor; <strong>Produckt</strong> bu araçlarla üretilmiş orijinal içeriklerle teknolojinin gücünü kanıtlıyor.</p>
+      <p>Herkese her şeyi satmaya çalışmıyoruz. Tek bir endüstriye odaklanıyor, orada en iyisi olmayı hedefliyoruz.</p>
+    </section>
 
-  </div>
-  <script src="script.js"></script>
- 
+  </main>
+
+  <footer class="footer">
+    <p>Lumos Generative AI &copy; 2026</p>
+  </footer>
 
 </body>
 </html>
